@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>عشانها | الرقي والجمال</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --main: #b5838d; --gold: #D4AF37; --bg: #fffafb; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); overflow-x: hidden; }
+
+        /* الهيدر المحسن */
+        header { 
+            background: white; 
+            height: 70px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0 15px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+        }
+
+        .logo-img { height: 55px; width: auto; }
+        .nav-btn { font-size: 1.4rem; color: var(--main); cursor: pointer; width: 40px; text-align: center; }
+
+        /* القائمة الجانبية */
+        .sidebar { 
+            position: fixed; 
+            right: -280px; 
+            top: 0; 
+            width: 260px; 
+            height: 100%; 
+            background: white; 
+            z-index: 2000; 
+            transition: 0.3s; 
+            padding: 20px; 
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1); 
+        }
+        .sidebar.active { right: 0; }
+
+        /* شبكة المنتجات */
+        .container { padding: 15px; }
+        .products-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; /* صف واحد للجوال ليظهر بوضوح */
+            gap: 20px; 
+        }
+        .card { 
+            background: white; 
+            border-radius: 15px; 
+            padding: 15px; 
+            text-align: center; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+        }
+        
+        /* حل مشكلة الصور المفقودة */
+        .card img { 
+            width: 100%; 
+            height: 250px; 
+            object-fit: cover; 
+            border-radius: 10px; 
+            background: #f0f0f0; /* خلفية رمادية تظهر بدلاً من المربع المكسور */
+        }
+
+        .price { color: var(--main); font-weight: bold; font-size: 1.2rem; margin: 10px 0; }
+        .add-btn { 
+            background: var(--main); 
+            color: white; 
+            border: none; 
+            width: 100%; 
+            padding: 12px; 
+            border-radius: 8px; 
+            font-weight: bold; 
+        }
+
+        .overlay { 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.4); 
+            display: none; 
+            z-index: 1500; 
+        }
+        .overlay.active { display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="overlay" id="overlay" onclick="closeAll()"></div>
+
+    <header>
+        <div class="nav-btn" onclick="openMenu()"><i class="fas fa-bars"></i></div>
+        <img src="logo.png" alt="عشانها" class="logo-img" onerror="this.src='https://via.placeholder.com/60x60?text=عشانها'">
+        <div class="nav-btn" onclick="openCart()"><i class="fas fa-shopping-bag"></i></div>
+    </header>
+
+    <div class="container">
+        <div class="products-grid">
+            <div class="card">
+                <img src="beauty.jpg" onerror="this.src='https://via.placeholder.com/300x300?text=صورة+المنتج'">
+                <h3>سيروم العناية</h3>
+                <p class="price">450 جنيه</p>
+                <button class="add-btn" onclick="add(1)">إضافة للسلة</button>
+            </div>
+            <div class="card">
+                <img src="baby.jpg" onerror="this.src='https://via.placeholder.com/300x300?text=صورة+المنتج'">
+                <h3>طقم مواليد قطني</h3>
+                <p class="price">750 جنيه</p>
+                <button class="add-btn" onclick="add(2)">إضافة للسلة</button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="sidebar" id="sidebar">
+        <h3>الأقسام</h3>
+        <p onclick="closeAll()">عناية</p>
+        <p onclick="closeAll()">مواليد</p>
+        <p onclick="closeAll()">منزل</p>
+    </nav>
+
+    <script>
+        function openMenu() {
+            document.getElementById('sidebar').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+        }
+        function closeAll() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        }
+        function add(id) {
+            alert("تمت الإضافة للسلة بنجاح!");
+        }
+    </script>
+</body>
+</html>
